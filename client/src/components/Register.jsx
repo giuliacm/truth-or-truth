@@ -1,9 +1,33 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+const useStyles = makeStyles((theme) => ({
+  login: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 const Register = () => {
+  const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [error, setError] = useState(null);
 
   const handleRegister = async (e) => {
@@ -21,34 +45,70 @@ const Register = () => {
   };
 
   return (
-    <Fragment>
-      <h1 className="text-center mt-5">Register</h1>
-      <form onSubmit={handleRegister}>
-        <div className="form-group">
-          <label htmlFor="inputUsername">Username</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputUsername"
-            value={username}
+    <Container component="main" maxWidth="xs">
+      <div className={classes.login}>
+        <Typography component="h1" variant="h5">
+          Truth or Truth
+        </Typography>
+        <form
+          className={classes.form}
+          autoComplete="off"
+          onSubmit={handleRegister}
+        >
+          {error && (
+            <Typography component="h1" variant="h5">
+              This is an error
+            </Typography>
+          )}
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoFocus
             onChange={(e) => setUsername(e.target.value)}
+            error={!!error}
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword">Password</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
             type="password"
-            className="form-control"
-            id="inputPassword"
-            value={password}
+            id="password"
             onChange={(e) => setPassword(e.target.value)}
+            error={!!error}
           />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    </Fragment>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password2"
+            label="Re-enter Password"
+            type="password"
+            id="password2"
+            onChange={(e) => setPassword2(e.target.value)}
+            error={!!error}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
+          <Link href="/login">{'Already have an account? Log In'}</Link>
+        </form>
+      </div>
+    </Container>
   );
 };
 
