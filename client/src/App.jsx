@@ -10,6 +10,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Games from './components/Games';
 import UserProvider from './contexts/UserProvider';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 
 const PrivateRoute = ({ children, ...rest }) => {
   const userData = useContext(UserProvider.context);
@@ -33,16 +35,18 @@ const PublicRoute = ({ children, ...rest }) => {
 
 const App = () => {
   return (
-    <UserProvider>
-      <Router>
-        <Switch>
-          <PublicRoute exact path="/" component={Login}></PublicRoute>
-          <PublicRoute exact path="/login" component={Login}></PublicRoute>
-          <Route path="/register" component={Register}></Route>
-          <PrivateRoute path="/games" component={Games}></PrivateRoute>
-        </Switch>
-      </Router>
-    </UserProvider>
+    <ThemeProvider theme={theme}>
+      <UserProvider>
+        <Router>
+          <Switch>
+            <PublicRoute exact path="/" component={Login}></PublicRoute>
+            <PublicRoute exact path="/login" component={Login}></PublicRoute>
+            <Route path="/register" component={Register}></Route>
+            <PrivateRoute path="/games" component={Games}></PrivateRoute>
+          </Switch>
+        </Router>
+      </UserProvider>
+    </ThemeProvider>
   );
 };
 

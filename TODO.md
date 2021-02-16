@@ -1,10 +1,13 @@
 - add routes and pages
-
-  - figure out protected components
-  - figure out routing once logged in
+  - fix async return for routing
+  - fix register as public component
   - make sure sessions working as expected
-
-- figure out permissions for APIs
+- login
+  - add game title header
+- register
+  - add game title header
+  - password compare
+  - make sure api works
 - games
   - APIs for deleting game and all referenced questions, permissions
   - design and implementation of games page
