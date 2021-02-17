@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
-  login: {
+  register: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(8),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -31,34 +31,48 @@ const Register = () => {
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState(null);
 
+  const isPasswordMatching = () => {
+    return password === password2;
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    axios({
-      method: 'post',
-      data: { username, password },
-      withCredentials: true,
-      url: 'http://localhost:5000/auth/register',
-    })
-      .then((res) => console.log(res))
-      .catch((err) => {
-        console.log(err.response);
-      });
+
+    if (!isPasswordMatching()) {
+      setError('Passwords do not match');
+    } else {
+      axios({
+        method: 'post',
+        data: { username, password },
+        withCredentials: true,
+        url: 'http://localhost:5000/auth/register',
+      })
+        .then((res) => {
+          console.log(res);
+          setError('');
+          window.location.href = '/';
+        })
+        .catch((err) => {
+          console.log(err.response);
+          setError(err.response.data);
+        });
+    }
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.login}>
-        <Typography component="h1" variant="h5">
-          Truth or Truth
-        </Typography>
+    <Container component="main" maxWidth="xl">
+      <Typography component="h2" variant="h1" className={classes.register}>
+        Truth or Truth
+      </Typography>
+      <Container component="main" maxWidth="xs">
         <form
           className={classes.form}
           autoComplete="off"
           onSubmit={handleRegister}
         >
           {error && (
-            <Typography component="h1" variant="h5">
-              This is an error
+            <Typography component="h1" variant="h6" color="error">
+              {error}
             </Typography>
           )}
           <TextField
@@ -112,7 +126,7 @@ const Register = () => {
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Container>
     </Container>
   );
 };

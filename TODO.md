@@ -6,8 +6,7 @@
   - add game title header
 - register
   - add game title header
-  - password compare
-  - make sure api works
+  - make sure api works + new user exists
 - games
   - APIs for deleting game and all referenced questions, permissions
   - design and implementation of games page

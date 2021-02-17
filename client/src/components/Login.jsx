@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(8),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -45,24 +45,25 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err.response);
-        setError(err.response);
+        // incorrect username or password
+        setError(err.response.data);
       });
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.login}>
-        <Typography component="h1" variant="h5">
-          Truth or Truth
-        </Typography>
+    <Container component="main" maxWidth="xl">
+      <Typography component="h2" variant="h1" className={classes.login}>
+        Truth or Truth
+      </Typography>
+      <Container component="main" maxWidth="xs">
         <form
           className={classes.form}
           autoComplete="off"
           onSubmit={handleLogin}
         >
           {error && (
-            <Typography component="h1" variant="h5">
-              This is an error
+            <Typography component="h2" variant="h6" color="error">
+              {error}
             </Typography>
           )}
           <TextField
@@ -104,7 +105,7 @@ const Login = () => {
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Container>
     </Container>
   );
 };
