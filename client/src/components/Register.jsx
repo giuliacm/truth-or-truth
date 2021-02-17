@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import '@fontsource/paytone-one';
 
 const useStyles = makeStyles((theme) => ({
   register: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    fontFamily: 'Paytone One',
   },
   form: {
     width: '100%',

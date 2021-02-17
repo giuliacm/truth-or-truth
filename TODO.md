@@ -2,12 +2,10 @@
   - fix async return for routing
   - fix register as public component
   - make sure sessions working as expected
-- login
-  - add game title header
 - register
-  - add game title header
   - make sure api works + new user exists
 - games
+  - rename page to HOME, rename in links and menu bar dropdown
   - APIs for deleting game and all referenced questions, permissions
   - design and implementation of games page
 - questions

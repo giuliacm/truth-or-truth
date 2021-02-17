@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import '@fontsource/paytone-one';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontFamily: 'Paytone One',
+    paddingLeft: theme.spacing(3),
   },
   menu: {
     '&:focus': {
@@ -57,7 +60,7 @@ const MenuBar = ({ username }) => {
     <div className={classes.root}>
       <AppBar position="sticky">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h3" className={classes.title}>
             Truth or Truth
           </Typography>
           <div>
