@@ -33,10 +33,7 @@ router.get('/', async (req, res) => {
 router.delete('/', async (req, res) => {
   try {
     const { gameId } = req.body;
-    const deleteGame = await pool.query(
-      'DELETE FROM games WHERE game_id = $1',
-      [gameId]
-    );
+    await pool.query('DELETE FROM games WHERE game_id = $1', [gameId]);
     res.json('Successfully deleted game');
   } catch (err) {
     res.status(500).send(err.message);
@@ -47,10 +44,10 @@ router.delete('/', async (req, res) => {
 router.put('/', async (req, res) => {
   try {
     const { newGameName, gameId } = req.body;
-    const newGame = await pool.query(
-      'UPDATE games SET name = $1 WHERE game_id = $2',
-      [newGameName, gameId]
-    );
+    await pool.query('UPDATE games SET name = $1 WHERE game_id = $2', [
+      newGameName,
+      gameId,
+    ]);
     res.json('Successfully updated game name');
   } catch (err) {
     res.status(500).send(err.message);

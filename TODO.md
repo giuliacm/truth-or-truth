@@ -1,15 +1,17 @@
 - add routes and pages
-  - fix async return for routing
+  - fix async return for routing for public
   - fix register as public component
-  - make sure sessions working as expected
 - register
   - make sure api works + new user exists
 - games
+  - bold name in dialogs
+  - add Games title
+  - fix Create New Game button
+  - fix icons on smaller screen
   - rename page to HOME, rename in links and menu bar dropdown
   - APIs for deleting game and all referenced questions, permissions
   - design and implementation of games page
 - questions
-  - create questions database
   - test APIs
 - permissions
   - create permissions database
