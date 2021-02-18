@@ -55,9 +55,7 @@ router.post('/login', (req, res, next) => {
         throw err;
         // return next(err);
       }
-      // res.send('successfully authenticated');
-      console.log('about to redirect to games');
-      res.redirect('/games');
+      res.status(200).send('successfully authenticated');
     });
   })(req, res, next);
 });

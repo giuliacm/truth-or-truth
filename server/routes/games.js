@@ -19,28 +19,28 @@ router.post('/', async (req, res) => {
 // get all games for given user
 router.get('/', async (req, res) => {
   try {
-    const { user_id } = req.body;
     const allGames = await pool.query(
       'SELECT * FROM games WHERE user_id = $1',
-      [user_id]
+      [req.query.id]
     );
     res.json(allGames.rows);
   } catch (err) {
-    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
 // delete a game TODO with all questions, and permissions
 router.delete('/', async (req, res) => {
   try {
-    const { game_id } = req.body;
+    const { gameId } = req.body;
     const deleteGame = await pool.query(
       'DELETE FROM games WHERE game_id = $1',
-      [game_id]
+      [gameId]
     );
-    res.json('successfully deleted game');
+    res.json('Successfully deleted game');
   } catch (err) {
     console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
