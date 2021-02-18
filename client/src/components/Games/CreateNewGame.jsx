@@ -1,17 +1,14 @@
 import React, { useState, Fragment } from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import CreateIcon from '@material-ui/icons/Create';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 
-const EditGameItem = ({ gameId, gameName, onEdit }) => {
+const CreateNewGame = ({ onCreate }) => {
+  const [newGameName, setNewGameName] = useState('');
   const [open, setOpen] = useState(false);
-  const [updatedGameName, setUpdatedGameName] = useState('');
   const [error, setError] = useState(null);
 
   const handleOpen = () => {
@@ -21,49 +18,44 @@ const EditGameItem = ({ gameId, gameName, onEdit }) => {
   const handleClose = () => {
     setOpen(false);
     setError(false);
-    setUpdatedGameName('');
+    setNewGameName('');
   };
 
-  const handleUpdate = () => {
-    if (updatedGameName === gameName) {
-      setError('Please select a new name');
-    } else if (updatedGameName === '') {
+  const handleCreate = () => {
+    if (newGameName === '') {
       setError('Please enter a valid name');
     } else {
-      onEdit(gameId, updatedGameName);
+      onCreate(newGameName);
       handleClose();
     }
   };
 
   return (
     <Fragment>
-      <IconButton onClick={handleOpen}>
-        <CreateIcon />
-      </IconButton>
+      <Button color="primary" onClick={handleOpen}>
+        Create New Game
+      </Button>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="xs">
-        <DialogTitle id="alert-dialog-title">Edit Game</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Create New Game</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {'Update the name of ' + gameName + ':'}
-          </DialogContentText>
           <TextField
             error={!!error}
             helperText={error}
             autoFocus
             margin="dense"
             id="name"
-            label="New name"
+            label="Name"
             type="text"
             fullWidth
-            onChange={(e) => setUpdatedGameName(e.target.value)}
+            onChange={(e) => setNewGameName(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleUpdate} color="primary">
-            Update
+          <Button onClick={handleCreate} color="primary">
+            Create
           </Button>
         </DialogActions>
       </Dialog>
@@ -71,4 +63,4 @@ const EditGameItem = ({ gameId, gameName, onEdit }) => {
   );
 };
 
-export default EditGameItem;
+export default CreateNewGame;

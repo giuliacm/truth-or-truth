@@ -5,14 +5,14 @@ const pool = require('../db');
 // create a game
 router.post('/', async (req, res) => {
   try {
-    const { name, user_id } = req.body;
+    const { name, userId } = req.body;
     const newGame = await pool.query(
       'INSERT INTO games (name, user_id) VALUES($1, $2) RETURNING *',
-      [name, user_id]
+      [name, userId]
     );
     res.json(newGame.rows[0]);
   } catch (err) {
-    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   try {
     const allGames = await pool.query(
       'SELECT * FROM games WHERE user_id = $1',
-      [req.query.id]
+      [req.query.userId]
     );
     res.json(allGames.rows);
   } catch (err) {
@@ -51,7 +51,7 @@ router.put('/', async (req, res) => {
       'UPDATE games SET name = $1 WHERE game_id = $2',
       [newGameName, gameId]
     );
-    res.json('games name updated');
+    res.json('Successfully updated game name');
   } catch (err) {
     res.status(500).send(err.message);
   }
