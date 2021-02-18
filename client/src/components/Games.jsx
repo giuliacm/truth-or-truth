@@ -18,13 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const Games = ({ userData }) => {
   const classes = useStyles();
 
-  const [newGameName, setNewGameName] = useState('');
-  const [games, setGames] = useState([
-    { game_id: 1, name: 'game 1' },
-    { game_id: 2, name: 'game 2' },
-    { game_id: 3, name: 'game 3' },
-    { game_id: 4, name: 'game 4' },
-  ]);
+  const [games, setGames] = useState([]);
 
   const handleCreateGame = async (e) => {
     e.preventDefault();
@@ -46,6 +40,21 @@ const Games = ({ userData }) => {
     axios({
       method: 'delete',
       data: { gameId },
+      withCredentials: true,
+      url: 'http://localhost:5000/games',
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  const handleEditGame = async (gameId, newGameName) => {
+    axios({
+      method: 'put',
+      data: { gameId, newGameName },
       withCredentials: true,
       url: 'http://localhost:5000/games',
     })
@@ -88,6 +97,7 @@ const Games = ({ userData }) => {
                 gameId={value.game_id}
                 gameName={value.name}
                 onDelete={handleDeleteGame}
+                onEdit={handleEditGame}
               />
             ))}
           </List>

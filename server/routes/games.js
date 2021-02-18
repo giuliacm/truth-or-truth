@@ -39,7 +39,6 @@ router.delete('/', async (req, res) => {
     );
     res.json('Successfully deleted game');
   } catch (err) {
-    console.log(err.message);
     res.status(500).send(err.message);
   }
 });
@@ -47,14 +46,14 @@ router.delete('/', async (req, res) => {
 // update game name
 router.put('/', async (req, res) => {
   try {
-    const { new_name, game_id } = req.body;
+    const { newGameName, gameId } = req.body;
     const newGame = await pool.query(
       'UPDATE games SET name = $1 WHERE game_id = $2',
-      [new_name, game_id]
+      [newGameName, gameId]
     );
     res.json('games name updated');
   } catch (err) {
-    console.log(err.message);
+    res.status(500).send(err.message);
   }
 });
 
