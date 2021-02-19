@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
-import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,10 +8,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import { Typography } from '@material-ui/core';
 
-const DeleteGameItem = ({ gameId, gameName, onDelete }) => {
+const DeleteItem = ({ id, item, onDelete, type }) => {
   const [open, setOpen] = useState(false);
-
+  const title = type === 'question' ? 'Delete Question' : 'Delete Game';
   const handleOpen = () => {
     setOpen(true);
   };
@@ -26,17 +27,29 @@ const DeleteGameItem = ({ gameId, gameName, onDelete }) => {
         <DeleteIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="xs">
-        <DialogTitle id="alert-dialog-title">Delete Game</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title} </DialogTitle>
+
         <DialogContent>
           <DialogContentText>
-            {'Are you sure you want to delete ' + gameName + '?'}
+            <Typography component="span">
+              Are you sure you want to delete{' '}
+              <Box
+                component="span"
+                fontWeight="fontWeightBold"
+                fontStyle="italic"
+                display="inline"
+              >
+                {item}
+              </Box>
+              ?
+            </Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => onDelete(gameId)} color="primary">
+          <Button onClick={() => onDelete(id)} color="primary">
             Delete
           </Button>
         </DialogActions>
@@ -45,4 +58,4 @@ const DeleteGameItem = ({ gameId, gameName, onDelete }) => {
   );
 };
 
-export default DeleteGameItem;
+export default DeleteItem;

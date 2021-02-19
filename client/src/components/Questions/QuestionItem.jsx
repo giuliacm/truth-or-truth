@@ -11,29 +11,39 @@ const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const GameItem = ({ gameId, gameName, onDelete, onEdit }) => {
+const QuestionItem = ({
+  questionId,
+  questionDescription,
+  onDelete,
+  onEdit,
+}) => {
   const classes = useStyles();
   return (
     <ListItem
-      component={Link}
-      to="/questions"
-      button
-      key={gameId}
-      onClick={() => console.log('clicked game' + gameId)}
+      //   component={Link}
+      //   to="/questions"
+      //   button
+      key={questionId}
+      onClick={() => console.log('clicked game' + questionId)}
       className={classes.root}
     >
-      <ListItemText id={gameId} primary={gameName} />
+      <ListItemText id={questionId} primary={questionDescription} />
       <ListItemSecondaryAction>
-        <EditItem id={gameId} itemText={gameName} onEdit={onEdit} type="game" />
+        <EditItem
+          id={questionId}
+          itemText={questionDescription}
+          onEdit={onEdit}
+          type="question"
+        />
         <DeleteItem
-          id={gameId}
-          item={gameName}
+          id={questionId}
+          item={questionDescription}
           onDelete={onDelete}
-          type="game"
+          type="question"
         />
       </ListItemSecondaryAction>
     </ListItem>
   );
 };
 
-export default GameItem;
+export default QuestionItem;

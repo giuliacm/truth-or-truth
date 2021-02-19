@@ -8,7 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
 
-const CreateNewGame = ({ onCreate }) => {
+const CreateNewQuestion = ({ onCreate }) => {
   const [newGameName, setNewGameName] = useState('');
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
@@ -65,4 +65,4 @@ const CreateNewGame = ({ onCreate }) => {
   );
 };
 
-export default CreateNewGame;
+export default CreateNewQuestion;

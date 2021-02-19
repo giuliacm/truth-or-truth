@@ -89,8 +89,8 @@ const MenuBar = ({ username }) => {
                 horizontal: 'center',
               }}
             >
-              <MenuItem component={Link} to="/games">
-                Games
+              <MenuItem onClick={handleClose} component={Link} to="/games">
+                Games Menu
               </MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>

@@ -10,6 +10,7 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Games from './components/Games';
+import Questions from './components/Questions';
 import Play from './components/Play';
 import UserProvider from './contexts/UserProvider';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -110,6 +111,7 @@ const App = () => {
           <Route exact path="/login" component={Login}></Route>
           <Route path="/register" component={Register}></Route>
           <PrivateRoute path="/games" component={Games}></PrivateRoute>
+          <PrivateRoute path="/questions" component={Questions}></PrivateRoute>
           <PrivateRoute path="/play" component={Play}></PrivateRoute>
         </Switch>
       </Router>

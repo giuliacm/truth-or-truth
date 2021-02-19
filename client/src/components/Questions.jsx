@@ -1,32 +1,33 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import CreateNewItem from './ItemUtils/CreateNewItem';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import GameItem from './Games/GameItem';
 import MenuBar from './MenuBar';
+import CreateNewItem from './ItemUtils/CreateNewItem';
+import QuestionItem from './Questions/QuestionItem';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-  games: {
+  questions: {
     padding: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
   },
 }));
 
-const Games = ({ userData }) => {
+const Questions = ({ userData }) => {
   const classes = useStyles();
+  const gameId = 39;
 
-  const [games, setGames] = useState([]);
+  const [questions, setQuestions] = useState([]);
 
-  const handleDeleteGame = async (gameId) => {
+  const handleDeleteQuestion = async (questionId) => {
     axios({
       method: 'delete',
-      data: { gameId },
+      data: { questionId },
       withCredentials: true,
-      url: 'http://localhost:5000/games',
+      url: 'http://localhost:5000/questions',
     })
       .then((res) => {
         console.log(res);
@@ -36,12 +37,12 @@ const Games = ({ userData }) => {
       });
   };
 
-  const handleEditGame = async (gameId, newGameName) => {
+  const handleEditQuestion = async (questionId, newDescription) => {
     axios({
       method: 'put',
-      data: { gameId, newGameName },
+      data: { questionId, newDescription },
       withCredentials: true,
-      url: 'http://localhost:5000/games',
+      url: 'http://localhost:5000/questions',
     })
       .then((res) => {
         console.log(res);
@@ -51,12 +52,12 @@ const Games = ({ userData }) => {
       });
   };
 
-  const handleCreateGame = async (name) => {
+  const handleCreateQuestion = async (description) => {
     axios({
       method: 'post',
-      data: { name, userId: userData.user_id },
+      data: { description, userId: userData.user_id, gameId },
       withCredentials: true,
-      url: 'http://localhost:5000/games',
+      url: 'http://localhost:5000/questions',
     })
       .then((res) => {
         console.log(res);
@@ -69,43 +70,43 @@ const Games = ({ userData }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: 'http://localhost:5000/games',
+      url: 'http://localhost:5000/questions',
       withCredentials: true,
-      params: { userId: userData.user_id },
+      params: { gameId },
     })
       .then((res) => {
-        setGames(res.data);
+        setQuestions(res.data);
       })
       .catch((err) => {
-        setGames([]);
+        setQuestions([]);
       });
-  }, [handleCreateGame]);
+  }, [handleCreateQuestion]);
 
   return (
     <Fragment>
       <MenuBar username={userData.username} />
       <Grid container>
-        <Grid item xs={6} className={classes.games}>
+        <Grid item xs={8} className={classes.questions}>
           <Grid
-            xs={4}
+            xs={6}
             item
             container
             direction="row"
             justify="space-between"
             alignItems="center"
           >
-            <Typography variant="h4">Games</Typography>
-            <CreateNewItem onCreate={handleCreateGame} type="game" />
+            <Typography variant="h4">TODO Question Name</Typography>
+            <CreateNewItem onCreate={handleCreateQuestion} type="question" />
           </Grid>
 
           <List>
-            {games.map((value) => (
-              <GameItem
-                key={value.game_id}
-                gameId={value.game_id}
-                gameName={value.name}
-                onDelete={handleDeleteGame}
-                onEdit={handleEditGame}
+            {questions.map((value) => (
+              <QuestionItem
+                key={value.question_id}
+                questionId={value.question_id}
+                questionDescription={value.description}
+                onDelete={handleDeleteQuestion}
+                onEdit={handleEditQuestion}
               />
             ))}
           </List>
@@ -115,4 +116,4 @@ const Games = ({ userData }) => {
   );
 };
 
-export default Games;
+export default Questions;
