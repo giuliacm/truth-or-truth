@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import MenuBar from '../MenuBar';
+import NoDataMessage from '../NoDataMessage';
 import CreateNewItem from '../ItemUtils/CreateNewItem';
 import QuestionItem from './QuestionItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -83,34 +84,32 @@ const Questions = ({ userData }) => {
   return (
     <Fragment>
       <MenuBar username={userData.username} />
-      <Grid container>
-        <Grid item xs={8} className={classes.questions}>
-          <Grid
-            xs={6}
-            item
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Typography variant="h4">TODO Question Name</Typography>
+      {!gameId ? (
+        <NoDataMessage />
+      ) : (
+        <Grid container>
+          <Grid item xs={8} className={classes.questions}>
+            <Typography variant="h4">TODO Game Name</Typography>
+            <List>
+              <ListItem disableGutters>
+                <CreateNewItem
+                  onCreate={handleCreateQuestion}
+                  type="question"
+                />
+              </ListItem>
+              {questions.map((value) => (
+                <QuestionItem
+                  key={value.question_id}
+                  questionId={value.question_id}
+                  questionDescription={value.description}
+                  onDelete={handleDeleteQuestion}
+                  onEdit={handleEditQuestion}
+                />
+              ))}
+            </List>
           </Grid>
-          <List>
-            <ListItem disableGutters>
-              <CreateNewItem onCreate={handleCreateQuestion} type="question" />
-            </ListItem>
-            {questions.map((value) => (
-              <QuestionItem
-                key={value.question_id}
-                questionId={value.question_id}
-                questionDescription={value.description}
-                onDelete={handleDeleteQuestion}
-                onEdit={handleEditQuestion}
-              />
-            ))}
-          </List>
         </Grid>
-      </Grid>
+      )}
     </Fragment>
   );
 };

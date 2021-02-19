@@ -85,16 +85,7 @@ const Games = ({ userData }) => {
       <MenuBar username={userData.username} />
       <Grid container>
         <Grid item xs={6} className={classes.games}>
-          <Grid
-            xs={4}
-            item
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Typography variant="h4">Games</Typography>
-          </Grid>
+          <Typography variant="h4">Games Menu</Typography>
           <List>
             <ListItem disableGutters>
               <CreateNewItem onCreate={handleCreateGame} type="game" />

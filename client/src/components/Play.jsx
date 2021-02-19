@@ -1,22 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link as RouterLink } from 'react-router-dom';
 import MenuBar from './MenuBar';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Link } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  noData: {
-    marginTop: theme.spacing(20),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    flexGrow: 1,
-  },
-}));
+import NoDataMessage from './NoDataMessage';
 
 const Play = ({ userData = null, gameId = null }) => {
-  const classes = useStyles();
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -37,23 +24,10 @@ const Play = ({ userData = null, gameId = null }) => {
       });
   }, []);
 
-  const noData = (
-    <Grid item className={classes.noData}>
-      <Typography variant="h5" align="center">
-        Oops! It looks like you have no data. <br />
-        Return to the{' '}
-        <Link component={RouterLink} to="/games">
-          Games Menu
-        </Link>{' '}
-        to create a game.
-      </Typography>
-    </Grid>
-  );
-
   return (
     <Fragment>
       <MenuBar username={userData.username} />
-      {!gameId ? noData : <div>there's data</div>}
+      {!gameId ? <NoDataMessage /> : <div>there's data</div>}
     </Fragment>
   );
 };
