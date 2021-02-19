@@ -19,7 +19,6 @@ const GameItem = ({ gameId, gameName, onDelete, onEdit }) => {
       to="/questions"
       button
       key={gameId}
-      onClick={() => console.log('clicked game' + gameId)}
       className={classes.root}
     >
       <ListItemText id={gameId} primary={gameName} />

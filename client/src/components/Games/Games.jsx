@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import CreateNewItem from './ItemUtils/CreateNewItem';
+import CreateNewItem from '../ItemUtils/CreateNewItem';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import GameItem from './Games/GameItem';
-import MenuBar from './MenuBar';
+import GameItem from './GameItem';
+import MenuBar from '../MenuBar';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';

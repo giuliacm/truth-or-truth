@@ -9,8 +9,8 @@ import {
 import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
-import Games from './components/Games';
-import Questions from './components/Questions';
+import Games from './components/Games/Games';
+import Questions from './components/Questions/Questions';
 import Play from './components/Play';
 import UserProvider from './contexts/UserProvider';
 import { ThemeProvider } from '@material-ui/core/styles';
