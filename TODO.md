@@ -1,17 +1,15 @@
 THURSDAY
 
-- add Games Menu title
 - move/fix Create New Game button
 - fix icons on smaller screen
-- fix infinite rendering but also create new item not showing up in list
+- fix infinite rendering but also create new item not showing up in list (https://dmitripavlutin.com/react-useeffect-infinite-loop/#:~:text=()%20is%20used%3A-,useEffect(()%20%3D%3E%20setCount(count%20%2B%201),state%20update%20triggers%20re%2Drendering.)
 - game name click to questions page
 
 FRIDAY
 
 - make games list larger
-- no games message if no games to list
-- change all button hovers to dark theme color and remove underline (games list, games from appBar, games menu from play screen, register/login)
-- fix onClick link colour or find another way to redirect with props. For MenuBar and games list
+- no games message if no games to list, no questions message if no questions to list
+- find another way to redirect with props. For MenuBar and games list
 
 - add routes and pages
   - fix async return for routing for public

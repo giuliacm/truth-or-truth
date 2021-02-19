@@ -1,14 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import EditItem from '../ItemUtils/EditItem';
 import DeleteItem from '../ItemUtils/DeleteItem';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    },
+  },
 }));
 
 const QuestionItem = ({
@@ -19,14 +24,7 @@ const QuestionItem = ({
 }) => {
   const classes = useStyles();
   return (
-    <ListItem
-      //   component={Link}
-      //   to="/questions"
-      //   button
-      key={questionId}
-      onClick={() => console.log('clicked game' + questionId)}
-      className={classes.root}
-    >
+    <ListItem key={questionId} className={classes.root}>
       <ListItemText id={questionId} primary={questionDescription} />
       <ListItemSecondaryAction>
         <EditItem

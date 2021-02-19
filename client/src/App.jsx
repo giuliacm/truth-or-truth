@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -12,14 +12,12 @@ import Register from './components/Register';
 import Games from './components/Games/Games';
 import Questions from './components/Questions/Questions';
 import Play from './components/Play';
-import UserProvider from './contexts/UserProvider';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState({});
-  // const userData = useContext(UserProvider.context);
 
   useEffect(() => {
     console.log('STARTING USER CALL');

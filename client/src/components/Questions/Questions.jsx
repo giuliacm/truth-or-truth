@@ -1,12 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
 import MenuBar from '../MenuBar';
 import CreateNewItem from '../ItemUtils/CreateNewItem';
 import QuestionItem from './QuestionItem';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, List, Typography, ListItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   questions: {
@@ -80,7 +78,7 @@ const Questions = ({ userData }) => {
       .catch((err) => {
         setQuestions([]);
       });
-  }, [handleCreateQuestion]);
+  }, []);
 
   return (
     <Fragment>
@@ -96,10 +94,11 @@ const Questions = ({ userData }) => {
             alignItems="center"
           >
             <Typography variant="h4">TODO Question Name</Typography>
-            <CreateNewItem onCreate={handleCreateQuestion} type="question" />
           </Grid>
-
           <List>
+            <ListItem disableGutters>
+              <CreateNewItem onCreate={handleCreateQuestion} type="question" />
+            </ListItem>
             {questions.map((value) => (
               <QuestionItem
                 key={value.question_id}

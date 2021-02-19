@@ -1,12 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import CreateNewItem from '../ItemUtils/CreateNewItem';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
+import CreateNewItem from '../ItemUtils/CreateNewItem';
 import GameItem from './GameItem';
 import MenuBar from '../MenuBar';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, List, Typography, ListItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   games: {
@@ -67,6 +65,7 @@ const Games = ({ userData }) => {
   };
 
   useEffect(() => {
+    console.log('hi');
     axios({
       method: 'get',
       url: 'http://localhost:5000/games',
@@ -79,7 +78,7 @@ const Games = ({ userData }) => {
       .catch((err) => {
         setGames([]);
       });
-  }, [handleCreateGame]);
+  }, []);
 
   return (
     <Fragment>
@@ -95,10 +94,11 @@ const Games = ({ userData }) => {
             alignItems="center"
           >
             <Typography variant="h4">Games</Typography>
-            <CreateNewItem onCreate={handleCreateGame} type="game" />
           </Grid>
-
           <List>
+            <ListItem disableGutters>
+              <CreateNewItem onCreate={handleCreateGame} type="game" />
+            </ListItem>
             {games.map((value) => (
               <GameItem
                 key={value.game_id}

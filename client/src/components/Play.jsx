@@ -2,10 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link as RouterLink } from 'react-router-dom';
 import MenuBar from './MenuBar';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import { Grid, Typography, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   noData: {

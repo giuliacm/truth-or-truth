@@ -1,12 +1,13 @@
 import React, { useState, Fragment } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+} from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 const CreateNewItem = ({ onCreate, type }) => {
   const [newItemText, setNewItemText] = useState('');
@@ -38,9 +39,15 @@ const CreateNewItem = ({ onCreate, type }) => {
 
   return (
     <Fragment>
-      <IconButton onClick={handleOpen} color="primary">
-        <AddCircleOutlineIcon />
-      </IconButton>
+      <Button
+        size="large"
+        color="inherit"
+        startIcon={<AddIcon />}
+        onClick={handleOpen}
+        color="primary"
+      >
+        {title}
+      </Button>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="xs">
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>

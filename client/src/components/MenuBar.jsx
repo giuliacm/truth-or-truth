@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  MenuItem,
+  Menu,
+} from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import '@fontsource/paytone-one';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,11 +21,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     fontFamily: 'Paytone One',
     paddingLeft: theme.spacing(3),
-  },
-  menu: {
-    '&:focus': {
-      outline: 'none',
-    },
   },
 }));
 
@@ -67,7 +64,6 @@ const MenuBar = ({ username }) => {
             <Button
               size="large"
               color="inherit"
-              className={classes.menu}
               endIcon={<AccountCircle />}
               onClick={handleMenu}
             >
