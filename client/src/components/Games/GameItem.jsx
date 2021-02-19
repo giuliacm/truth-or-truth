@@ -10,7 +10,12 @@ import {
 
 const GameItem = ({ gameId, gameName, onDelete, onEdit }) => {
   return (
-    <ListItem component={Link} to="/questions" button key={gameId}>
+    <ListItem
+      component={Link}
+      to={{ pathname: '/questions', state: { gameId, gameName } }}
+      button
+      key={gameId}
+    >
       <ListItemText id={gameId} primary={gameName} />
       <ListItemSecondaryAction>
         <EditItem id={gameId} itemText={gameName} onEdit={onEdit} type="game" />

@@ -1,8 +1,8 @@
 FRIDAY
 
 - fix infinite rendering but also create new item not showing up in list (https://dmitripavlutin.com/react-useeffect-infinite-loop/#:~:text=()%20is%20used%3A-,useEffect(()%20%3D%3E%20setCount(count%20%2B%201),state%20update%20triggers%20re%2Drendering.)
-- game name click to questions page (props through location.state)
 - update delete game API to also delete all questions for that game
+- add play button to questions
 - play page
 
 SATURDAY

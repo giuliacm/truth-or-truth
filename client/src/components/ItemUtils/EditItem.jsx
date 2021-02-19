@@ -21,7 +21,6 @@ const EditItem = ({ id, itemText, onEdit, type }) => {
   const keyword = type === 'question' ? 'description' : 'name';
   const title = type === 'question' ? 'Edit Question' : 'Edit Game';
   const label = type === 'question' ? 'New description' : 'New name';
-  console.log('in edit item');
 
   const handleOpen = () => {
     setOpen(true);

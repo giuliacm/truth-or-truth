@@ -6,6 +6,7 @@ import CreateNewItem from '../ItemUtils/CreateNewItem';
 import QuestionItem from './QuestionItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, List, Typography, ListItem } from '@material-ui/core';
+import { get } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   questions: {
@@ -15,10 +16,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Questions = ({ userData }) => {
+const Questions = ({ userData, location = {} }) => {
   const classes = useStyles();
-  const gameId = 39;
-
+  const { gameId, gameName } = get(location, 'state', 'null');
   const [questions, setQuestions] = useState([]);
 
   const handleDeleteQuestion = async (questionId) => {
@@ -89,7 +89,7 @@ const Questions = ({ userData }) => {
       ) : (
         <Grid container>
           <Grid item xs={8} className={classes.questions}>
-            <Typography variant="h4">TODO Game Name</Typography>
+            <Typography variant="h4">{gameName}</Typography>
             <List>
               <ListItem disableGutters>
                 <CreateNewItem
