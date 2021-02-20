@@ -30,6 +30,21 @@ const Questions = ({ userData, location = {} }) => {
   const { gameId, gameName } = get(location, 'state', '');
   const [questions, setQuestions] = useState([]);
 
+  const getQuestions = () => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:5000/questions',
+      withCredentials: true,
+      params: { gameId },
+    })
+      .then((res) => {
+        setQuestions(res.data);
+      })
+      .catch((err) => {
+        setQuestions([]);
+      });
+  };
+
   const handleDeleteQuestion = async (questionId) => {
     axios({
       method: 'delete',
@@ -38,6 +53,7 @@ const Questions = ({ userData, location = {} }) => {
       url: 'http://localhost:5000/questions',
     })
       .then((res) => {
+        getQuestions();
         console.log(res);
       })
       .catch((err) => {
@@ -53,6 +69,7 @@ const Questions = ({ userData, location = {} }) => {
       url: 'http://localhost:5000/questions',
     })
       .then((res) => {
+        getQuestions();
         console.log(res);
       })
       .catch((err) => {
@@ -68,6 +85,7 @@ const Questions = ({ userData, location = {} }) => {
       url: 'http://localhost:5000/questions',
     })
       .then((res) => {
+        getQuestions();
         console.log(res);
       })
       .catch((err) => {
@@ -76,18 +94,7 @@ const Questions = ({ userData, location = {} }) => {
   };
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:5000/questions',
-      withCredentials: true,
-      params: { gameId },
-    })
-      .then((res) => {
-        setQuestions(res.data);
-      })
-      .catch((err) => {
-        setQuestions([]);
-      });
+    getQuestions();
   }, []);
 
   return (

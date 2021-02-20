@@ -37,7 +37,6 @@ const MenuBar = ({ username }) => {
       url: 'http://localhost:5000/auth/logout',
     })
       .then((res) => {
-        console.log(res);
         window.location.href = '/';
       })
       .catch((err) => {

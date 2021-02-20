@@ -7,9 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NoQuestionsMessage from './WarningMessages/NoQuestionsMessage';
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    vh: '90',
-  },
+  main: {},
   question: {
     marginTop: theme.spacing(20),
     display: 'flex',

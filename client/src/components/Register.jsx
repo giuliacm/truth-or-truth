@@ -52,12 +52,10 @@ const Register = () => {
         url: 'http://localhost:5000/auth/register',
       })
         .then((res) => {
-          console.log(res);
           setError('');
           window.location.href = '/';
         })
         .catch((err) => {
-          console.log(err.response);
           setError(err.response.data);
         });
     }

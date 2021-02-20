@@ -43,13 +43,10 @@ const Login = () => {
       url: 'http://localhost:5000/auth/login',
     })
       .then((res) => {
-        console.log(res);
         setError('');
         window.location.href = '/games';
       })
       .catch((err) => {
-        console.log(err.response);
-        // incorrect username or password
         setError(err.response.data);
       });
   };

@@ -16,8 +16,22 @@ const useStyles = makeStyles((theme) => ({
 
 const Games = ({ userData }) => {
   const classes = useStyles();
-
   const [games, setGames] = useState([]);
+
+  const getGames = () => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:5000/games',
+      withCredentials: true,
+      params: { userId: userData.user_id },
+    })
+      .then((res) => {
+        setGames(res.data);
+      })
+      .catch((err) => {
+        setGames([]);
+      });
+  };
 
   const handleDeleteGame = async (gameId) => {
     axios({
@@ -27,6 +41,7 @@ const Games = ({ userData }) => {
       url: 'http://localhost:5000/games',
     })
       .then((res) => {
+        getGames();
         console.log(res);
       })
       .catch((err) => {
@@ -42,6 +57,7 @@ const Games = ({ userData }) => {
       url: 'http://localhost:5000/games',
     })
       .then((res) => {
+        getGames();
         console.log(res);
       })
       .catch((err) => {
@@ -50,6 +66,7 @@ const Games = ({ userData }) => {
   };
 
   const handleCreateGame = async (name) => {
+    console.log('in create game');
     axios({
       method: 'post',
       data: { name, userId: userData.user_id },
@@ -57,6 +74,7 @@ const Games = ({ userData }) => {
       url: 'http://localhost:5000/games',
     })
       .then((res) => {
+        getGames();
         console.log(res);
       })
       .catch((err) => {
@@ -65,18 +83,7 @@ const Games = ({ userData }) => {
   };
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:5000/games',
-      withCredentials: true,
-      params: { userId: userData.user_id },
-    })
-      .then((res) => {
-        setGames(res.data);
-      })
-      .catch((err) => {
-        setGames([]);
-      });
+    getGames();
   }, []);
 
   return (
