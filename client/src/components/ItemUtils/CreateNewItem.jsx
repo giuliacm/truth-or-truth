@@ -41,7 +41,6 @@ const CreateNewItem = ({ onCreate, type }) => {
     <Fragment>
       <Button
         size="large"
-        color="inherit"
         startIcon={<AddIcon />}
         onClick={handleOpen}
         color="primary"

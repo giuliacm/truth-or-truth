@@ -1,24 +1,33 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import MenuBar from '../MenuBar';
 import NoDataMessage from '../NoDataMessage';
 import CreateNewItem from '../ItemUtils/CreateNewItem';
 import QuestionItem from './QuestionItem';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, List, Typography, ListItem } from '@material-ui/core';
+import { Grid, List, Typography, ListItem, Button } from '@material-ui/core';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { get } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   questions: {
     padding: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
   },
+  playButton: {
+    fontSize: '1.2rem',
+  },
 }));
 
 const Questions = ({ userData, location = {} }) => {
   const classes = useStyles();
-  const { gameId, gameName } = get(location, 'state', 'null');
+  const { gameId, gameName } = get(location, 'state', '');
   const [questions, setQuestions] = useState([]);
 
   const handleDeleteQuestion = async (questionId) => {
@@ -87,9 +96,30 @@ const Questions = ({ userData, location = {} }) => {
       {!gameId ? (
         <NoDataMessage />
       ) : (
-        <Grid container>
-          <Grid item xs={8} className={classes.questions}>
-            <Typography variant="h4">{gameName}</Typography>
+        <Grid container className={classes.root}>
+          <Grid item xs={9} className={classes.questions}>
+            <Grid
+              xs={12}
+              item
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="flex-start"
+            >
+              <Typography variant="h4">{gameName}</Typography>
+              <Button
+                align="center"
+                className={classes.playButton}
+                variant="contained"
+                size="large"
+                color="primary"
+                component={Link}
+                to={{ pathname: '/play', state: { questions, gameName } }}
+              >
+                <PlayArrowIcon fontSize="large" />
+                Play Game
+              </Button>
+            </Grid>
             <List>
               <ListItem disableGutters>
                 <CreateNewItem

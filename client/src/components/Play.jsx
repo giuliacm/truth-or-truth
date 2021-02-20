@@ -1,33 +1,18 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Fragment } from 'react';
 import MenuBar from './MenuBar';
 import NoDataMessage from './NoDataMessage';
+import { get } from 'lodash';
 
-const Play = ({ userData = null, gameId = null }) => {
-  const [questions, setQuestions] = useState([]);
+const Play = ({ userData = null, location = {} }) => {
+  const questions = get(location, 'state.questions', []);
+  const gameName = get(location, 'state.gameName', '');
 
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:5000/questions',
-      withCredentials: true,
-      params: { gameId },
-    })
-      .then((res) => {
-        console.log('in set question');
-        console.log(res);
-        setQuestions(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setQuestions([]);
-      });
-  }, []);
-
+  console.log(gameName);
+  console.log(questions);
   return (
     <Fragment>
       <MenuBar username={userData.username} />
-      {!gameId ? <NoDataMessage /> : <div>there's data</div>}
+      {!gameName ? <NoDataMessage /> : <div>there's data</div>}
     </Fragment>
   );
 };

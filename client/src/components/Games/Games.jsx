@@ -65,7 +65,6 @@ const Games = ({ userData }) => {
   };
 
   useEffect(() => {
-    console.log('hi');
     axios({
       method: 'get',
       url: 'http://localhost:5000/games',
