@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import MenuBar from '../MenuBar';
-import NoDataMessage from '../NoDataMessage';
+import NoDataMessage from '../WarningMessages/NoDataMessage';
 import CreateNewItem from '../ItemUtils/CreateNewItem';
 import QuestionItem from './QuestionItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -114,7 +114,10 @@ const Questions = ({ userData, location = {} }) => {
                 size="large"
                 color="primary"
                 component={Link}
-                to={{ pathname: '/play', state: { questions, gameName } }}
+                to={{
+                  pathname: '/play',
+                  state: { questions, gameName, gameId },
+                }}
               >
                 <PlayArrowIcon fontSize="large" />
                 Play Game

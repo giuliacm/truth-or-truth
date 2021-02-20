@@ -20,15 +20,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    console.log('STARTING USER CALL');
     setIsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
       url: 'http://localhost:5000/auth/user',
     }).then((res) => {
-      console.log('in user return');
-      console.log(res);
       if (res.data) {
         setUserData(res.data);
         setIsLoading(false);
@@ -39,81 +36,63 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     });
   }, []);
 
-  console.log(userData);
-  console.log(isLoading);
-
   if (isLoading) {
     return <div />;
-  } else {
-    if (userData) {
-      console.log(userData);
-      console.log('user data available, going GAMES');
-      return (
-        <Route
-          {...rest}
-          render={(props) => <Component {...props} userData={userData} />}
-        />
-      );
-    }
-
-    console.log('user data not available, going LOGIN');
-    return <Route {...rest} render={() => <Redirect to="/login" />} />;
   }
+  if (userData) {
+    return (
+      <Route
+        {...rest}
+        render={(props) => <Component {...props} userData={userData} />}
+      />
+    );
+  }
+  return <Route {...rest} render={() => <Redirect to="/login" />} />;
 };
 
 const PublicRoute = ({ component: Component, ...rest }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState({});
-  // const userData = useContext(UserProvider.context);
 
   useEffect(() => {
-    console.log('STARTING USER CALL');
     setIsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
       url: 'http://localhost:5000/auth/user',
     }).then((res) => {
-      setIsLoading(false);
-      console.log('in user return');
-      console.log(res);
       if (res.data) {
         setUserData(res.data);
+        setIsLoading(false);
       } else {
         setUserData(false);
+        setIsLoading(false);
       }
     });
   }, []);
 
-  console.log(userData);
-  console.log(isLoading);
-
-  if (userData) {
-    console.log('user data available, going GAMES');
-    return <Redirect to="/games" />;
-  }
   if (isLoading) {
     return <div />;
   }
-  console.log('user data not available, going route');
+  if (userData) {
+    return <Route {...rest} render={() => <Redirect to="/games" />} />;
+  }
   return <Route {...rest} render={(props) => <Component {...props} />} />;
 };
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      {/* <UserProvider> */}
       <Router>
         <Switch>
-          <Route exact path="/" component={Login}></Route>
-          <Route exact path="/login" component={Login}></Route>
-          <Route path="/register" component={Register}></Route>
+          <PublicRoute exact path="/" component={Login}></PublicRoute>
+          <PublicRoute exact path="/login" component={Login}></PublicRoute>
+          <PublicRoute path="/register" component={Register}></PublicRoute>
           <PrivateRoute path="/games" component={Games}></PrivateRoute>
           <PrivateRoute path="/questions" component={Questions}></PrivateRoute>
           <PrivateRoute path="/play" component={Play}></PrivateRoute>
         </Switch>
       </Router>
-      {/* </UserProvider> */}
     </ThemeProvider>
   );
 };
