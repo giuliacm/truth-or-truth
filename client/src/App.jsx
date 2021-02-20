@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './App.css';
+import PrivateRoute from './components/Routes/PrivateRoute';
+import PublicRoute from './components/Routes/PublicRoute';
 import Login from './components/Login';
 import Register from './components/Register';
 import Games from './components/Games/Games';
@@ -14,71 +10,6 @@ import Questions from './components/Questions/Questions';
 import Play from './components/Play';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
-
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    setIsLoading(true);
-    axios({
-      method: 'get',
-      withCredentials: true,
-      url: 'http://localhost:5000/auth/user',
-    }).then((res) => {
-      if (res.data) {
-        setUserData(res.data);
-        setIsLoading(false);
-      } else {
-        setUserData(false);
-        setIsLoading(false);
-      }
-    });
-  }, []);
-
-  if (isLoading) {
-    return <div />;
-  }
-  if (userData) {
-    return (
-      <Route
-        {...rest}
-        render={(props) => <Component {...props} userData={userData} />}
-      />
-    );
-  }
-  return <Route {...rest} render={() => <Redirect to="/login" />} />;
-};
-
-const PublicRoute = ({ component: Component, ...rest }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    setIsLoading(true);
-    axios({
-      method: 'get',
-      withCredentials: true,
-      url: 'http://localhost:5000/auth/user',
-    }).then((res) => {
-      if (res.data) {
-        setUserData(res.data);
-        setIsLoading(false);
-      } else {
-        setUserData(false);
-        setIsLoading(false);
-      }
-    });
-  }, []);
-
-  if (isLoading) {
-    return <div />;
-  }
-  if (userData) {
-    return <Route {...rest} render={() => <Redirect to="/games" />} />;
-  }
-  return <Route {...rest} render={(props) => <Component {...props} />} />;
-};
 
 const App = () => {
   return (
