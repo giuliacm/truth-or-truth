@@ -2,14 +2,27 @@ import React, { Fragment, useState } from 'react';
 import MenuBar from './MenuBar';
 import NoDataMessage from './WarningMessages/NoDataMessage';
 import { get, random } from 'lodash';
-import { Button, Typography, Grid, Container } from '@material-ui/core';
+import {
+  Button,
+  Typography,
+  Grid,
+  Container,
+  Card,
+  CardContent,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import NoQuestionsMessage from './WarningMessages/NoQuestionsMessage';
 
 const useStyles = makeStyles((theme) => ({
   main: {},
+  questionCard: {
+    width: '50vw',
+    height: '50vh',
+    borderRadius: '40px',
+    color: 'white',
+    backgroundColor: theme.palette.primary.main,
+  },
   question: {
-    marginTop: theme.spacing(20),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -43,17 +56,25 @@ const Play = ({ userData = null, location = {} }) => {
         <NoQuestionsMessage gameId={gameId} gameName={gameName} />
       ) : (
         <Container component="main" maxWidth="xl" className={classes.main}>
-          <Grid container direction="row" justify="center" alignItems="center">
-            in the grid
-            <Grid item className={classes.question} xs={2}>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            style={{ minHeight: '80vh' }}
+            align="center"
+          >
+            <Grid item xs={2}>
               <Button onClick={handleNext}>Back</Button>
             </Grid>
             <Grid item className={classes.question} xs={6}>
-              <Typography variant="h5" align="center">
-                {question}
-              </Typography>
+              <Card className={classes.questionCard}>
+                <CardContent>
+                  <Typography variant="h2">{question}</Typography>
+                </CardContent>
+              </Card>
             </Grid>
-            <Grid item className={classes.question} xs={2}>
+            <Grid item xs={2}>
               <Button onClick={handleNext}>Next</Button>
             </Grid>
           </Grid>
