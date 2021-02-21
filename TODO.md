@@ -1,6 +1,5 @@
 SATURDAY
 
-- update delete game API to also delete all questions for that game
 - bug bash
   - register + new user exists
 - clean up env variables
