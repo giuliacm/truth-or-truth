@@ -34,7 +34,7 @@ const MenuBar = ({ username }) => {
     axios({
       method: 'get',
       withCredentials: true,
-      url: 'http://localhost:5000/auth/logout',
+      url: '/auth/logout',
     })
       .then((res) => {
         window.location.href = '/';

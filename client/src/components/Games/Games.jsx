@@ -21,7 +21,7 @@ const Games = ({ userData }) => {
   const getGames = () => {
     axios({
       method: 'get',
-      url: 'http://localhost:5000/games',
+      url: '/games',
       withCredentials: true,
       params: { userId: userData.user_id },
     })
@@ -38,7 +38,7 @@ const Games = ({ userData }) => {
       method: 'delete',
       data: { gameId },
       withCredentials: true,
-      url: 'http://localhost:5000/games',
+      url: '/games',
     })
       .then((res) => {
         getGames();
@@ -54,7 +54,7 @@ const Games = ({ userData }) => {
       method: 'put',
       data: { gameId, newGameName },
       withCredentials: true,
-      url: 'http://localhost:5000/games',
+      url: '/games',
     })
       .then((res) => {
         getGames();
@@ -71,7 +71,7 @@ const Games = ({ userData }) => {
       method: 'post',
       data: { name, userId: userData.user_id },
       withCredentials: true,
-      url: 'http://localhost:5000/games',
+      url: '/games',
     })
       .then((res) => {
         getGames();

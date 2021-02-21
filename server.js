@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const pool = require('./db');
 const session = require('express-session');
 require('dotenv').config();
 const passport = require('passport');
@@ -11,8 +10,16 @@ const app = express();
 const authRouter = require('./routes/auth');
 const gamesRouter = require('./routes/games');
 const questionsRouter = require('./routes/questions');
+const path = require('path');
+
+// PORT
+const PORT = process.env.PORT || 5000;
 
 // MIDDLEWARE
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -39,6 +46,10 @@ app.use('/auth', authRouter);
 app.use('/games', gamesRouter);
 app.use('/questions', questionsRouter);
 
-app.listen(5000, () => {
-  console.log('server has started on port 5000');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`server has started on port ${PORT}`);
 });

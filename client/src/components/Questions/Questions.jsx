@@ -33,7 +33,7 @@ const Questions = ({ userData, location = {} }) => {
   const getQuestions = () => {
     axios({
       method: 'get',
-      url: 'http://localhost:5000/questions',
+      url: '/questions',
       withCredentials: true,
       params: { gameId },
     })
@@ -50,7 +50,7 @@ const Questions = ({ userData, location = {} }) => {
       method: 'delete',
       data: { questionId },
       withCredentials: true,
-      url: 'http://localhost:5000/questions',
+      url: '/questions',
     })
       .then((res) => {
         getQuestions();
@@ -66,7 +66,7 @@ const Questions = ({ userData, location = {} }) => {
       method: 'put',
       data: { questionId, newDescription },
       withCredentials: true,
-      url: 'http://localhost:5000/questions',
+      url: '/questions',
     })
       .then((res) => {
         getQuestions();
@@ -82,7 +82,7 @@ const Questions = ({ userData, location = {} }) => {
       method: 'post',
       data: { description, userId: userData.user_id, gameId },
       withCredentials: true,
-      url: 'http://localhost:5000/questions',
+      url: '/questions',
     })
       .then((res) => {
         getQuestions();

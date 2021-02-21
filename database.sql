@@ -24,11 +24,3 @@ CREATE TABLE questions
   FOREIGN KEY (game_id) REFERENCES games(game_id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
-
-
-CREATE TABLE permissions
-(
-  permission_id SERIAL PRIMARY KEY,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (game_id) REFERENCES games(game_id)
-);

@@ -49,7 +49,7 @@ const Register = () => {
         method: 'post',
         data: { username, password },
         withCredentials: true,
-        url: 'http://localhost:5000/auth/register',
+        url: '/auth/register',
       })
         .then((res) => {
           setError('');
