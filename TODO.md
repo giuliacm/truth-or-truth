@@ -1,11 +1,6 @@
 SATURDAY
 
 - update delete game API to also delete all questions for that game
-- play page
-  - adjust card font size
-  - add padding to card
-  - next button
-  - button to return to questions page
 - bug bash
   - register + new user exists
 - clean up env variables

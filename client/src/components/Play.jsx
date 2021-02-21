@@ -1,32 +1,33 @@
 import React, { Fragment, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import MenuBar from './MenuBar';
 import NoDataMessage from './WarningMessages/NoDataMessage';
+import NoQuestionsMessage from './WarningMessages/NoQuestionsMessage';
 import { get, random } from 'lodash';
 import {
-  Button,
   Typography,
   Grid,
   Container,
   Card,
   CardContent,
+  IconButton,
+  Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import NoQuestionsMessage from './WarningMessages/NoQuestionsMessage';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles((theme) => ({
-  main: {},
+  backButton: { marginTop: theme.spacing(4) },
   questionCard: {
     width: '50vw',
     height: '50vh',
     borderRadius: '40px',
     color: 'white',
     backgroundColor: theme.palette.primary.main,
-  },
-  question: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexGrow: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 }));
 
@@ -56,6 +57,17 @@ const Play = ({ userData = null, location = {} }) => {
         <NoQuestionsMessage gameId={gameId} gameName={gameName} />
       ) : (
         <Container component="main" maxWidth="xl" className={classes.main}>
+          <Grid item className={classes.backButton}>
+            <Button
+              size="large"
+              startIcon={<ArrowBackIosIcon />}
+              color="primary"
+              component={RouterLink}
+              to={{ pathname: '/questions', state: { gameId, gameName } }}
+            >
+              Back to questions
+            </Button>
+          </Grid>
           <Grid
             container
             direction="row"
@@ -64,10 +76,8 @@ const Play = ({ userData = null, location = {} }) => {
             style={{ minHeight: '80vh' }}
             align="center"
           >
-            <Grid item xs={2}>
-              <Button onClick={handleNext}>Back</Button>
-            </Grid>
-            <Grid item className={classes.question} xs={6}>
+            <Grid item xs={2} />
+            <Grid item xs={6}>
               <Card className={classes.questionCard}>
                 <CardContent>
                   <Typography variant="h2">{question}</Typography>
@@ -75,7 +85,9 @@ const Play = ({ userData = null, location = {} }) => {
               </Card>
             </Grid>
             <Grid item xs={2}>
-              <Button onClick={handleNext}>Next</Button>
+              <IconButton onClick={handleNext}>
+                <ArrowForwardIcon fontSize="large" />
+              </IconButton>
             </Grid>
           </Grid>
         </Container>
