@@ -49,7 +49,7 @@ const Register = () => {
         method: 'post',
         data: { username, password },
         withCredentials: true,
-        url: '/auth/register',
+        url: '/api/auth/register',
       })
         .then((res) => {
           setError('');

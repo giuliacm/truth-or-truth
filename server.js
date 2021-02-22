@@ -42,9 +42,9 @@ app.use(passport.session());
 initializePassport(passport);
 
 // ROUTES
-app.use('/auth', authRouter);
-app.use('/games', gamesRouter);
-app.use('/questions', questionsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/games', gamesRouter);
+app.use('/api/questions', questionsRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));

@@ -11,7 +11,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
     axios({
       method: 'get',
       withCredentials: true,
-      url: '/auth/user',
+      url: '/api/auth/user',
     }).then((res) => {
       if (res.data) {
         setUserData(res.data);

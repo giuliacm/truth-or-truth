@@ -34,7 +34,7 @@ const MenuBar = ({ username }) => {
     axios({
       method: 'get',
       withCredentials: true,
-      url: '/auth/logout',
+      url: '/api/auth/logout',
     })
       .then((res) => {
         window.location.href = '/';

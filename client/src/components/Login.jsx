@@ -40,7 +40,7 @@ const Login = () => {
       method: 'post',
       data: { username, password },
       withCredentials: true,
-      url: '/auth/login',
+      url: '/api/auth/login',
     })
       .then((res) => {
         setError('');
